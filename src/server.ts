@@ -1,16 +1,7 @@
 import http, { IncomingMessage, Server, ServerResponse } from "http";
 import config from "./config";
-import addRoutes, { RouteHandler, routes } from "./helpers/RouteHandler";
-
-addRoutes("GET", "/", (req, res) => {
-  res.writeHead(200, { "content-type": "application/json" });
-  res.end(
-    JSON.stringify({
-      message: "Hello from Node.js with typescript",
-      path: req.url,
-    })
-  );
-});
+import { RouteHandler, routes } from "./helpers/RouteHandler";
+import './routes/index'
 
 const server: Server = http.createServer(
   (req: IncomingMessage, res: ServerResponse) => {
@@ -36,34 +27,14 @@ const server: Server = http.createServer(
     }
 
     // if (req.url == "/api/users" && req.method == "POST") {
-    //   // if (req.url == "/api" && req.method == "GET") {
-    //   //   root route
-    //   //   if (req.url == "/" && req.method == "GET") {
-    //   //     res.writeHead(200, { "content-type": "application/json" });
-    //   //     res.end(
-    //   //       JSON.stringify({
-    //   //         message: "Hello from Node.js with typescript",
-    //   //         path: req.url,
-    //   //       })
-    //   //     );
-    //   //   }
+      // if (req.url == "/api" && req.method == "GET") {
 
-    //   //   health route
-    //   //   res.writeHead(200, { "content-type": "application/json" });
-    //   //   res.end(
-    //   //     JSON.stringify({
-    //   //       message: "Health status ok",
-    //   //       path: req.url,
-    //   //     })
-    //   //   );
-    //   // }
-
-    //   // const user = {
-    //   //   id: 1,
-    //   //   name: "alice",
-    //   // };
-    //   // res.writeHead(200, { "content-type": "application/json" });
-    //   // res.end(JSON.stringify(user));
+      // const user = {
+      //   id: 1,
+      //   name: "alice",
+      // };
+      // res.writeHead(200, { "content-type": "application/json" });
+      // res.end(JSON.stringify(user));
 
     //   let body = "";
 
@@ -72,11 +43,11 @@ const server: Server = http.createServer(
     //     body += chunk.toString();
     //   });
 
-    //   // req.on("end", () => {
-    //   //   const parseBody = JSON.parse(body);
-    //   //   console.log(parseBody);
-    //   //   res.end(JSON.stringify(parseBody));
-    //   // });
+      // req.on("end", () => {
+      //   const parseBody = JSON.parse(body);
+      //   console.log(parseBody);
+      //   res.end(JSON.stringify(parseBody));
+      // });
 
     //   req.on("end", () => {
     //     try {
