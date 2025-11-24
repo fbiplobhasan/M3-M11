@@ -6,5 +6,5 @@
 "types": ["node"], ata uncomment kora. agula comment kora "sourceMap": true, "declaration": true, "declarationMap": true, ata comment kora "jsx": "react-jsx",atao comment kora "verbatimModuleSyntax": true,
 5. .env file create // NODE_ENV=development, PORT= 5000.
 6. root a thaka src er vitore config file a index.ts file create kora.
-7. npm dotenv 
-
+7. npm dotenv
+8. "dev": "ts-node ./src/server.ts" ay line ta add kore dite hobe.
