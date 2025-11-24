@@ -25,13 +25,38 @@ const server: Server = http.createServer(
         })
       );
     }
+
     if (req.url == "/api/users" && req.method == "POST") {
-      const user = {
-        id: 1,
-        name: "alice",
-      };
-      res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify(user));
+      // const user = {
+      //   id: 1,
+      //   name: "alice",
+      // };
+      // res.writeHead(200, { "content-type": "application/json" });
+      // res.end(JSON.stringify(user));
+
+      let body = "";
+
+      // listen for data chunk
+      req.on("data", (chunk) => {
+        body += chunk.toString();
+      });
+
+      // req.on("end", () => {
+      //   const parseBody = JSON.parse(body);
+      //   console.log(parseBody);
+      //   res.end(JSON.stringify(parseBody));
+      // });
+
+      req.on("end", () => {
+        try {
+          const parseBody = JSON.parse(body);
+          console.log(parseBody);
+          console.log("catching current changes");
+          res.end(JSON.stringify(parseBody));
+        } catch (err: any) {
+          console.log(err?.message);
+        }
+      });
     }
   }
 );
