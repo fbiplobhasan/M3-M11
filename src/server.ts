@@ -5,6 +5,7 @@ const server: Server = http.createServer(
   (req: IncomingMessage, res: ServerResponse) => {
     console.log("server is running...");
 
+    // root route
     if (req.url == "/" && req.method == "GET") {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(
@@ -13,6 +14,24 @@ const server: Server = http.createServer(
           path: req.url,
         })
       );
+    }
+    // health route
+    if (req.url == "/api" && req.method == "GET") {
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(
+        JSON.stringify({
+          message: "Health status ok",
+          path: req.url,
+        })
+      );
+    }
+    if (req.url == "/api/users" && req.method == "POST") {
+      const user = {
+        id: 1,
+        name: "alice",
+      };
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(JSON.stringify(user));
     }
   }
 );
