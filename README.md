@@ -8,3 +8,4 @@
 6. root a thaka src er vitore config file a index.ts file create kora.
 7. npm dotenv
 8. "dev": "ts-node ./src/server.ts" ay line ta add kore dite hobe.
+9. ts-node-dev --respawn --transpile-only //ata dile uto reload hoye postman theke data niye ahsbe ar bar bar server off kore on kora lagbena. 
