@@ -1,3 +1,4 @@
+import { readUsers, writeUser } from "../helpers/fileDb";
 import parseBody from "../helpers/parseBody";
 import addRoutes from "../helpers/RouteHandler";
 import sendJson from "../helpers/sendJson";
@@ -18,5 +19,43 @@ addRoutes("GET", "/api", (req, res) => {
 
 addRoutes("POST", "/api/users", async (req, res) => {
   const body = await parseBody(req);
-  sendJson(res, 201, body);
+
+  const users = readUsers();
+
+  const newUser = {
+    id: Date.now(),
+    ...body,
+  };
+
+  users?.push(newUser);
+
+  writeUser(users);
+
+  sendJson(res, 201, { success: true, data: body });
+});
+
+addRoutes("PUT", "/api/users/:id", async (req, res) => {
+  const { id } = (req as any).params;
+  const body = await parseBody(req);
+
+  const users = readUsers();
+
+  const index = users.findIndex((user: any) => {
+    if (index === 1) {
+      sendJson(res, 404, {
+        success: false,
+        message: "user not found",
+      });
+    }
+  });
+  users[index] = {
+    ...users[index],
+    ...body,
+  };
+  writeUser(users);
+  sendJson(res, 202, {
+    success: true,
+    message: `id ${id} user updated`,
+    data: users[index],
+  });
 });
