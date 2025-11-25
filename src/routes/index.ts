@@ -40,19 +40,21 @@ addRoutes("PUT", "/api/users/:id", async (req, res) => {
 
   const users = readUsers();
 
-  const index = users.findIndex((user: any) => {
-    if (index === 1) {
-      sendJson(res, 404, {
-        success: false,
-        message: "user not found",
-      });
-    }
-  });
+  const index = users.findIndex((user: any) => user.id == id);
+
+  if (index === -1) {
+    return sendJson(res, 404, {
+      success: false,
+      message: "user not found",
+    });
+  }
   users[index] = {
     ...users[index],
     ...body,
   };
+
   writeUser(users);
+
   sendJson(res, 202, {
     success: true,
     message: `id ${id} user updated`,
